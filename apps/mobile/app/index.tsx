@@ -2,12 +2,12 @@ import { useMemo, useState } from 'react';
 import { router } from 'expo-router';
 import {
   Pressable,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   View
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { StationPicker } from '../src/components/StationPicker';
 import {
   metroStations,

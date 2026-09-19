@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { router } from 'expo-router';
 import {
   Pressable,
@@ -10,8 +10,8 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StationPicker } from '../src/components/StationPicker';
 import {
-  metroStations,
-  metrobusStations,
+  metroLines,
+  metrobusLines,
   type RouteMode,
   type Transport
 } from '@meperdienelmetro/core';
@@ -22,7 +22,7 @@ export default function HomeScreen(){
   const [from,setFrom]=useState('');
   const [to,setTo]=useState('');
   const [mode,setMode]=useState<RouteMode>('fast');
-  const stations=useMemo(()=>transport==='metro'?metroStations:metrobusStations,[transport]);
+  const lines=transport==='metro'?metroLines:metrobusLines;
 
   function changeTransport(next:Transport){
     setTransport(next);
@@ -65,8 +65,8 @@ export default function HomeScreen(){
         <Text style={styles.cardEyebrow}>01 · PLANEA TU VIAJE</Text>
         <Text style={styles.cardTitle}>¿A dónde vamos?</Text>
 
-        <StationPicker label="Estoy en" value={from} stations={stations} onChange={setFrom} placeholder="Selecciona tu origen" />
-        <StationPicker label="Quiero ir a" value={to} stations={stations} onChange={setTo} placeholder="Selecciona tu destino" />
+        <StationPicker label="Estoy en" value={from} lines={lines} onChange={setFrom} placeholder="Selecciona tu origen" />
+        <StationPicker label="Quiero ir a" value={to} lines={lines} onChange={setTo} placeholder="Selecciona tu destino" />
         {sameStation&&<Text style={styles.validationError}>El origen y el destino deben ser estaciones diferentes.</Text>}
 
         {transport==='metro'&&<>

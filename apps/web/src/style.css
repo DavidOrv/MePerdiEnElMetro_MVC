@@ -978,3 +978,28 @@ html[data-system='metrobus'][data-theme='dark'] body{background:#1c1216}html[dat
 .mb-route-map{display:block;min-width:100%;height:auto}
 .metrobus-stops{display:grid;gap:10px;overflow:visible;padding:14px 0 4px}.metrobus-stops span{min-height:18px;padding-left:18px}.metrobus-stops span:after{content:'';position:absolute;left:2px;top:11px;width:2px;height:18px;background:#d7c4ca}.metrobus-stops span:last-child:after{display:none}.metrobus-stops span.terminal{color:#542f3a;font-weight:800}
 body:has(.search-button:disabled)::before{content:'';position:fixed;inset:0;z-index:90;background:#f8f9f5e8;backdrop-filter:blur(3px)}body:has(.search-button:disabled)::after{content:'Calculando tu mejor ruta';position:fixed;z-index:91;left:50%;top:50%;transform:translate(-50%,-50%);padding:17px 23px;border-radius:12px;background:#24392f;color:white;font-weight:700;box-shadow:0 16px 40px #24392f30}
+
+/* Motion: a brief, staggered arrival keeps the route planner feeling responsive. */
+@keyframes page-reveal{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes page-reveal-left{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
+@keyframes route-pulse{0%,100%{box-shadow:0 0 0 0 #ee5d2600}45%{box-shadow:0 0 0 7px #ee5d2624}}
+
+.page-content-ready header{animation:page-reveal .42s ease-out both}
+.page-content-ready .sub-nav{animation:page-reveal .42s .06s ease-out both}
+.page-content-ready .intro,.page-content-ready .metrobus-intro{animation:page-reveal .5s .12s ease-out both}
+.page-content-ready .workspace>aside{animation:page-reveal-left .5s .2s ease-out both}
+.page-content-ready .workspace>.result{animation:page-reveal .55s .28s ease-out both}
+.page-content-ready .metrobus-guide,.page-content-ready .metrobus-service,.page-content-ready .network,.page-content-ready footer{animation:page-reveal .5s .36s ease-out both}
+
+.search-button{transition:background .2s,transform .2s,box-shadow .2s}
+.search-button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 18px #d7481238}
+.search-button:active:not(:disabled){transform:translateY(0);box-shadow:none}
+.search-button:focus-visible{animation:route-pulse 1.3s ease-in-out infinite}
+.swap,.options,.route-options>button,.line-summary,.mb-line-card summary{transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.swap:hover{transform:rotate(180deg)}
+.options{transform-origin:top;animation:options-open .16s ease-out both}
+@keyframes options-open{from{opacity:0;transform:translateY(-5px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.route-options>button:hover{transform:translateY(-2px);box-shadow:0 7px 14px #24392f12}
+.line-summary:hover,.mb-line-card summary:hover{background:#f5f8f2}
+
+@media(prefers-reduced-motion:reduce){.page-content-ready header,.page-content-ready .sub-nav,.page-content-ready .intro,.page-content-ready .metrobus-intro,.page-content-ready .workspace>aside,.page-content-ready .workspace>.result,.page-content-ready .metrobus-guide,.page-content-ready .metrobus-service,.page-content-ready .network,.page-content-ready footer,.options,.search-button:focus-visible{animation:none!important}.search-button:hover:not(:disabled),.route-options>button:hover,.swap:hover{transform:none}}

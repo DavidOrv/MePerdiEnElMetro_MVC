@@ -60,7 +60,7 @@ return}if(from===to){setError(language==='en'?'Origin and destination must be di
 return}setError('');
 setLoading(true);
 setSelected(0);
-setTimeout(()=>{setTrip({from,to,mode});setLoading(false)},900)}return <>{(pageLoading||loading)&&<PageLoader routing={loading&&!pageLoading}/>}
+setTimeout(()=>{setTrip({from,to,mode});setLoading(false)},900)}return <>{(pageLoading||loading)&&<PageLoader routing={loading&&!pageLoading}/>}<div className={pageLoading?'page-content':'page-content page-content-ready'}>
 <header>
 <a className="brand" href="./">
 <img className="brand-icon" src="/logo.svg" alt=""/>
@@ -203,6 +203,6 @@ setTo(from)}}>
 <footer>
 <span>{isMetrobus?'Hecho para moverte por la CDMX en Metrobús.':language==='en'?'Made to move through CDMX.':'Hecho para moverte por la CDMX.'}</span>
 <span>{isMetrobus?'Proyecto independiente · No afiliado a Metrobús CDMX':language==='en'?'Independent project · Not affiliated with STC Metro':'Proyecto independiente · No afiliado al STC Metro'}</span>
-</footer>
+</footer></div>
 </>}
 createRoot(document.getElementById('root')).render(<App/>);

@@ -56,6 +56,7 @@ return()=>clearTimeout(timer)},[]);
 useEffect(()=>{const update=()=>setMobile(window.innerWidth<=760);window.addEventListener('resize',update);return()=>window.removeEventListener('resize',update)},[]);
 function submit(e){e.preventDefault();
 if(!stations.includes(from)||!stations.includes(to)){setError(t.error);
+return}if(from===to){setError(language==='en'?'Origin and destination must be different stations.':'El origen y el destino deben ser estaciones diferentes.');
 return}setError('');
 setLoading(true);
 setSelected(0);

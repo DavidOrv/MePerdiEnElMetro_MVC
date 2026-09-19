@@ -30,7 +30,8 @@ export default function HomeScreen(){
     setTo('');
   }
 
-  const ready=Boolean(from&&to&&from!==to);
+  const sameStation=Boolean(from&&to&&from===to);
+  const ready=Boolean(from&&to&&!sameStation);
 
   function search(){
     if(!ready) return;
@@ -66,6 +67,7 @@ export default function HomeScreen(){
 
         <StationPicker label="Estoy en" value={from} stations={stations} onChange={setFrom} placeholder="Selecciona tu origen" />
         <StationPicker label="Quiero ir a" value={to} stations={stations} onChange={setTo} placeholder="Selecciona tu destino" />
+        {sameStation&&<Text style={styles.validationError}>El origen y el destino deben ser estaciones diferentes.</Text>}
 
         {transport==='metro'&&<>
           <Text style={styles.preferenceLabel}>Elige tu recorrido</Text>
@@ -119,6 +121,7 @@ const styles=StyleSheet.create({
   card:{backgroundColor:theme.colors.surface,borderRadius:theme.radius.lg,padding:20,borderWidth:1,borderColor:theme.colors.border},
   cardEyebrow:{fontSize:10,fontWeight:'900',letterSpacing:1.1,color:theme.colors.accent},
   cardTitle:{fontSize:25,fontWeight:'900',color:theme.colors.text,marginTop:6,marginBottom:2},
+  validationError:{color:'#B42318',fontSize:13,fontWeight:'700',marginTop:12},
   preferenceLabel:{fontSize:13,fontWeight:'700',color:theme.colors.muted,marginTop:22,marginBottom:8},
   preferences:{flexDirection:'row',gap:8},
   preference:{flex:1,paddingVertical:12,paddingHorizontal:8,borderRadius:14,borderWidth:1,borderColor:theme.colors.border,alignItems:'center'},

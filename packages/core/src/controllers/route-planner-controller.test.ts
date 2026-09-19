@@ -73,11 +73,16 @@ describe('controlador compartido', () => {
   });
 
   it('rechaza usar la misma estación como origen y destino', () => {
-    assert.equal(planRoute({
-      transport: 'metrobus',
-      from: 'Reforma',
-      to: 'Reforma'
-    }).error, 'same-station');
+    for (const [transport, station] of [
+      ['metro', 'Balderas'],
+      ['metrobus', 'Reforma']
+    ] as const) {
+      assert.equal(planRoute({
+        transport,
+        from: station,
+        to: station
+      }).error, 'same-station');
+    }
   });
 });
 
